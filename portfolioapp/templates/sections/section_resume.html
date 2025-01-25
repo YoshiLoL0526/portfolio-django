@@ -1,0 +1,89 @@
+{% comment %} Section resume {% endcomment %}
+{% load filters %}
+<section class="section" id="resume">
+    <div class="container">
+        <h2 class="mb-5"><span class="text-danger">My</span> Resume</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="mt-2">
+                            <h4>Expertise</h4>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% for expertise in expertises%}
+                        <h6 class="title text-danger">{{ expertise.start_date }} - {{ expertise.end_date|default:"Present" }}</h6>
+                        <P>{{ expertise.job_title }}</P>
+                        <P class="subtitle">{{ expertise.company_name }}</P>
+                        <hr>
+                        {% empty %}
+                        <P>There are not expertises.</P>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="mt-2">
+                            <h4>Education</h4>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% for education in educations%}
+                        <h6 class="title text-danger">{{ education.start_date }} - {{ education.end_date|default:"Present" }}</h6>
+                        <P>{{ education.degree_title }}</P>
+                        <P class="subtitle">{{ education.education_level }}</P>
+                        <hr>
+                        {% empty %}
+                        <P>There are not educations.</P>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pull-left">
+                            <h4 class="mt-2">Skills</h4>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-2">
+                        {% for skill in skills %}
+                        <h6>{{ skill.name }}</h6>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                 style="width: {{ skill.level|skill_level_to_percent }}%"
+                                 aria-valuenow="{{ skill.level|skill_level_to_percent }}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        {% empty %}
+                        <P>There are not skills.</P>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pull-left">
+                            <h4 class="mt-2">Languages</h4>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-2">
+                        {% for language in languages %}
+                        <h6>{{ language.name }}</h6>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ language.level|language_level_to_percent }}%" aria-valuenow="{{ language.level|language_level_to_percent }}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
